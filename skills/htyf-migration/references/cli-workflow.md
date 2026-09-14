@@ -93,6 +93,13 @@ migration rules; `--godot-project` can select an internal game directory.
 Godot binary resolution uses `--godot-bin`, `GODOT_EDITOR`, cache, then default,
 and fails without prompting when the binary is unusable.
 
+The current Taro platform plugin opens an interactive menu even from
+`build:htyf`. CLI non-interactive flags do not apply to that menu. Inspect any
+existing project automation before claiming an unattended build; otherwise
+record the required human menu step and verify its actual result. Taro packaging
+reads identity and assetsHost from `htyf.config.json` and version from
+`package.json`, so reconcile these with the generated application identity.
+
 For Taro, inspect the generated `package.json` and run its HTYF-specific build
 script as required by migration-rules. Do not substitute the direct RN CLI
 build for Taro's platform build. Packaging or successful compilation does not
