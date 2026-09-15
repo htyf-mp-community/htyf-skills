@@ -128,24 +128,25 @@ versions may predate share QR generation. Current workspace output is:
 
 | Build flow | Configuration and package | Share QR | Download QR |
 | --- | --- | --- | --- |
-| Direct RN / CLI Web | `dist/app.json`, `dist/dist.dgz` | `dist/share-qrcode.png` | `dist/dist/qrcode.png` |
-| Godot CLI | `dist/app.json`, `dist/dist.ios.dgz` or `dist/dist.android.dgz` | `dist/share-qrcode.png` | `qrcode.png` in the selected Godot output directory |
-| Taro platform plugin | `dist_htyf/app.json`, `dist_htyf/dist.dgz` | Generate `dist_htyf/share-qrcode.png` separately | `dist_htyf/qrcode.png` |
+| Direct RN / CLI Web | `dist/app.json`, `dist/dist.dgz` | `dist/qrcode.png` | `dist/dist/qrcode.png` |
+| Godot CLI | `dist/app.json`, `dist/dist.ios.dgz` or `dist/dist.android.dgz` | `dist/qrcode.png` | `qrcode.png` in the selected Godot output directory |
+| Taro platform plugin | `dist_htyf/app.json`, `dist_htyf/dist.dgz` | `dist_htyf/qrcode.png` | None in the updated plugin |
 
 The updated CLI generates the share image after compression and prints the
 share URL and terminal QR. Use the final generated `app.json`, including the
 actual version and Godot platform-specific `zipUrl`, to verify its payload.
-Taro's separate packaging flow currently generates only the download image.
-For Taro or older CLI versions, generate a share image from the public fields
-of the final built configuration using the protocol in
+The updated Taro plugin also generates its share image after compression and
+prints the share URL and terminal QR. For older CLI/plugin versions that only
+produce download images, generate a share image from the public fields of the
+final built configuration using the protocol in
 [the README delivery rules](migration-rules.md#target-readme-preview-sharing-and-app-usage).
 
-For a Taro configuration verified to contain only public launch fields, the
+For an older Taro plugin, with a configuration verified to contain only public launch fields, the
 following macOS/Linux commands run from the target root:
 
 ```bash
 SHARE_URL=$(node -e 'const fs = require("node:fs"); const app = JSON.parse(fs.readFileSync("dist_htyf/app.json", "utf8")); console.log("https://mp.dagouzhi.com/share?data=" + encodeURIComponent(JSON.stringify(app)))')
-npx qrcode -o dist_htyf/share-qrcode.png "$SHARE_URL"
+npx qrcode -o dist_htyf/qrcode.png "$SHARE_URL"
 printf '%s\n' "$SHARE_URL"
 ```
 

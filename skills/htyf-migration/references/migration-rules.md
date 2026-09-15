@@ -682,9 +682,9 @@ The opening section must contain:
    saved in a durable target path such as `docs/assets/htyf-share-qr.png` and
    referenced relatively from the README. Put the clickable share link beside
    it. Follow [the build-specific share QR workflow](cli-workflow.md#share-qr-artifacts-after-packaging)
-   to reuse the updated CLI's `share-qrcode.png` or generate the missing Taro/
-   older-CLI share image. Verify its payload before copying it into the durable
-   README asset path. CLI/Taro `qrcode.png` encodes a download URL; use the
+   to reuse the updated CLI's `dist/qrcode.png` or Taro's
+   `dist_htyf/qrcode.png`, or generate a share image for older tool versions. Verify its payload before copying it into the durable
+   README asset path. The CLI package-internal `qrcode.png` and older Taro output encode download URLs; use the verified
    share-page QR for this section. Include the actual regeneration command and
    refresh the displayed image on every release. Deliver the image file with
    the README so it renders without relying on an ignored build directory.

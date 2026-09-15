@@ -46,7 +46,7 @@ AI 按功能清单完成模板初始化、逐项迁移、原生能力核对、�
 
 迁移后的目标 `README.md` 提供中英文内容，开头会根据最终 HTYF 配置展示「预览、分享与使用 / Preview, Share and Use」：预览及分享链接、可扫描的二维码，以及安装红糖云服 App、扫码添加项目、打开并体验核心功能的步骤。增量迁移同步更新两种语言的内容；尚未部署或验证的入口会明确标注状态。
 
-RN、Godot 和 Taro 目标均需展示分享二维码，并随 README 交付图片文件。按[打包后的分享二维码流程](skills/htyf-migration/references/cli-workflow.md#share-qr-artifacts-after-packaging)复用 CLI 分享码或为 Taro 单独生成，保存到持久文档目录，并说明资源上传、红糖云服下载和扫码体验步骤。
+RN、Godot 和 Taro 目标均需展示分享二维码，并随 README 交付图片文件。按[打包后的分享二维码流程](skills/htyf-migration/references/cli-workflow.md#share-qr-artifacts-after-packaging)复用 CLI/Taro 自动生成的分享码（旧版工具需单独生成），保存到持久文档目录，并说明资源上传、红糖云服下载和扫码体验步骤。
 
 - [Skill 入口](skills/htyf-migration/SKILL.md)
 - [红糖云服官网与 App 下载入口](https://mp.dagouzhi.com)
@@ -104,7 +104,7 @@ The AI follows a feature checklist to initialize the template, migrate features,
 
 The migrated target's `README.md` includes both Chinese and English. Its opening “预览、分享与使用 / Preview, Share and Use” section uses the final HTYF configuration to provide preview and share links, a scannable QR code, and steps to install the 红糖云服 App, scan to add the project, open it, and try its core features. Incremental migrations update both languages. Entries awaiting deployment or verification are clearly labeled.
 
-RN, Godot, and Taro targets must embed a share QR image and deliver it with the README. Follow the [post-build share QR workflow](skills/htyf-migration/references/cli-workflow.md#share-qr-artifacts-after-packaging) to reuse the CLI share image or generate one separately for Taro, store it in a durable documentation directory, and explain resource uploads, the HTYF App download, and scanning to try the project.
+RN, Godot, and Taro targets must embed a share QR image and deliver it with the README. Follow the [post-build share QR workflow](skills/htyf-migration/references/cli-workflow.md#share-qr-artifacts-after-packaging) to reuse the CLI/Taro share image (generate one separately for older tools), store it in a durable documentation directory, and explain resource uploads, the HTYF App download, and scanning to try the project.
 
 - [Skill entry point](skills/htyf-migration/SKILL.md)
 - [HTYF official website and App download entry](https://mp.dagouzhi.com)
