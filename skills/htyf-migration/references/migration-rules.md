@@ -681,9 +681,13 @@ The opening section must contain:
 3. **QR image:** generate and embed a real QR code for that same share URL,
    saved in a durable target path such as `docs/assets/htyf-share-qr.png` and
    referenced relatively from the README. Put the clickable share link beside
-   it. CLI/Taro build `qrcode.png` currently encodes `zipUrl` with an
-   `appUrlConfig` fallback; inspect its payload and host support before reuse.
-   A raw package/config URL is not automatically the single-app add/share QR.
+   it. Follow [the build-specific share QR workflow](cli-workflow.md#share-qr-artifacts-after-packaging)
+   to reuse the updated CLI's `share-qrcode.png` or generate the missing Taro/
+   older-CLI share image. Verify its payload before copying it into the durable
+   README asset path. CLI/Taro `qrcode.png` encodes a download URL; use the
+   share-page QR for this section. Include the actual regeneration command and
+   refresh the displayed image on every release. Deliver the image file with
+   the README so it renders without relying on an ignored build directory.
 4. **Add and use:** include [红糖云服官网](https://mp.dagouzhi.com) in the
    opening guide. Provide numbered steps to visit that official site, follow
    its download entry to install/open 红糖云服 App, open its scan/add entry, scan this README's
@@ -692,6 +696,9 @@ The opening section must contain:
    the link or QR image with another user so they can follow the same process.
    Use current host UI labels, and document same-device link/image handling
    only when the host actually supports it.
+   Explain that the generated configuration and resource package must first
+   be uploaded to `appUrlConfig` and `zipUrl`, and show the actual artifact
+   paths for the selected template and platform.
 
 When configuration, hosting, or device access is unavailable, keep this section
 at the top and identify the exact missing fields, deployment steps, or pending

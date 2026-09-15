@@ -120,3 +120,47 @@ is a persistent service, not a finite verification command; capture its status
 and manage its process when device testing needs it. Commands produce readable
 logs, not a JSON protocol. Check exit code 0 for success and 1 for failure, and
 record the build artifact path printed on successful packaging.
+
+## Share QR artifacts after packaging
+
+Inspect the verified build implementation and its actual output; installed
+versions may predate share QR generation. Current workspace output is:
+
+| Build flow | Configuration and package | Share QR | Download QR |
+| --- | --- | --- | --- |
+| Direct RN / CLI Web | `dist/app.json`, `dist/dist.dgz` | `dist/share-qrcode.png` | `dist/dist/qrcode.png` |
+| Godot CLI | `dist/app.json`, `dist/dist.ios.dgz` or `dist/dist.android.dgz` | `dist/share-qrcode.png` | `qrcode.png` in the selected Godot output directory |
+| Taro platform plugin | `dist_htyf/app.json`, `dist_htyf/dist.dgz` | Generate `dist_htyf/share-qrcode.png` separately | `dist_htyf/qrcode.png` |
+
+The updated CLI generates the share image after compression and prints the
+share URL and terminal QR. Use the final generated `app.json`, including the
+actual version and Godot platform-specific `zipUrl`, to verify its payload.
+Taro's separate packaging flow currently generates only the download image.
+For Taro or older CLI versions, generate a share image from the public fields
+of the final built configuration using the protocol in
+[the README delivery rules](migration-rules.md#target-readme-preview-sharing-and-app-usage).
+
+For a Taro configuration verified to contain only public launch fields, the
+following macOS/Linux commands run from the target root:
+
+```bash
+SHARE_URL=$(node -e 'const fs = require("node:fs"); const app = JSON.parse(fs.readFileSync("dist_htyf/app.json", "utf8")); console.log("https://mp.dagouzhi.com/share?data=" + encodeURIComponent(JSON.stringify(app)))')
+npx qrcode -o dist_htyf/share-qrcode.png "$SHARE_URL"
+printf '%s\n' "$SHARE_URL"
+```
+
+Resolve a usable QR tool before unattended execution; first-time `npx` may
+prompt to install it. For other flows, substitute their verified config and
+output paths. Generate machine-readable codes with a QR encoder.
+
+Copy the verified share image into a durable README asset path such as
+`docs/assets/htyf-share-qr.png`; build directories may be cleaned or ignored by
+Git. Keep that image in the delivered files and use a relative Markdown image
+reference so repository/document previews render it. Regenerate and refresh
+the copy after configuration, version, or platform changes.
+
+Document uploading the built configuration and package to their respective
+`appUrlConfig` and `zipUrl` addresses before remote use. Packaging and QR
+generation do not upload those files. Follow the README delivery rules for
+the bilingual download, scan, add/open, and feature walkthrough and record
+deployment and device verification status separately.
