@@ -643,6 +643,69 @@ layout tests where practical. At minimum cover:
     React Native application adapter or dependency policy was imposed on the
     Taro branch.
 
+## Target README: preview, sharing, and App usage
+
+For every target type and every full or incremental migration, create or update
+`<target>/README.md` with both Chinese and English content in that file. Keep
+instructions, feature descriptions, and availability status equivalent in both
+languages, including on incremental updates. Immediately after the project
+title and a short summary, place a bilingual
+`## 预览、分享与使用 / Preview, Share and Use` section, before installation, development,
+architecture, and migration history. Keep the source README unchanged and
+preserve useful target documentation below this opening section.
+
+Derive the guide from the final target configuration and actual build output:
+direct RN and Godot use `app.json`'s `htyf` object; Taro uses
+`htyf.config.json`, `package.json`, and the generated HTYF `app.json`. Reconcile
+the app name, `appid`, type, version, `appUrlConfig`, `zipUrl`, and any Taro
+`assetsHost`-derived URLs. Replace template demo identities and addresses with
+the target's configured values; missing project-specific values are delivery
+gaps, not an invitation to invent working URLs.
+
+The opening section must contain:
+
+1. **Preview:** a clickable project preview/share entry with its availability
+   status. Describe whether it opens a share landing page, runs a verified H5
+   preview, or requires the 红糖云服 App. For local preview, include the actual
+   target command and device/network prerequisites; label development-service
+   links as temporary. Include the main migrated features and a short path to
+   try them, using actual page/action names.
+2. **Sharing:** a copyable clickable share URL generated from the target's
+   public HTYF configuration using the current host's supported protocol.
+   Verify the installed CLI/host implementation before generating it. The
+   current single-app protocol is
+   `https://mp.dagouzhi.com/share?data=` followed by
+   `encodeURIComponent(JSON.stringify(publicAppConfig))`; its parsed data must
+   include the target `appid` and `appUrlConfig`, plus the public launch fields
+   required by the current host. Exclude secrets and local-only configuration.
+3. **QR image:** generate and embed a real QR code for that same share URL,
+   saved in a durable target path such as `docs/assets/htyf-share-qr.png` and
+   referenced relatively from the README. Put the clickable share link beside
+   it. CLI/Taro build `qrcode.png` currently encodes `zipUrl` with an
+   `appUrlConfig` fallback; inspect its payload and host support before reuse.
+   A raw package/config URL is not automatically the single-app add/share QR.
+4. **Add and use:** include [红糖云服官网](https://mp.dagouzhi.com) in the
+   opening guide. Provide numbered steps to visit that official site, follow
+   its download entry to install/open 红糖云服 App, open its scan/add entry, scan this README's
+   QR code, allow camera access when requested, wait for the project to be
+   added and loaded, and try the documented core features. Explain how to share
+   the link or QR image with another user so they can follow the same process.
+   Use current host UI labels, and document same-device link/image handling
+   only when the host actually supports it.
+
+When configuration, hosting, or device access is unavailable, keep this section
+at the top and identify the exact missing fields, deployment steps, or pending
+device checks. Label configured but unpublished links/QR codes as unavailable
+until deployed; do not present demo URLs or placeholders as usable previews.
+Do not claim that packaging alone publishes the app or verifies scanning.
+
+Before delivery, verify the README image exists, decode the QR to confirm it
+matches the share link, decode the share data to check target identity and URLs,
+and check configured remote configuration/package availability when possible.
+Record an App scan/add/open result or explicitly mark it pending. On incremental
+migration, refresh affected links, QR images, version details, and feature steps
+from the updated configuration so the opening guide stays current.
+
 ## Completion report
 
 Report the source and target absolute paths, whether the default `HTYF/`
@@ -653,6 +716,8 @@ migrated feature checklist, deliberate source-to-target differences, source
 baseline and delta applied, retained `_HTYF_SDK` revision for Godot or native
 modules used for direct React Native, Taro targets verified, and verification
 commands with their results.
+Include the target README and QR image paths, preview/share availability, and
+link, QR-payload, and App scan/add/open verification results or concrete gaps.
 For Godot, also report the source version, Godot 4.7 conversion work, dependency
 compatibility audit, replacements, unresolved blockers, and Godot 4.7
 target-host acceptance evidence. Also report the source-to-mobile input map,

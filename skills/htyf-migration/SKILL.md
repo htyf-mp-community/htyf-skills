@@ -32,7 +32,10 @@ assets, permissions, loading, empty and error states, and platform interaction.
    rules to both mini-program and mini-game UI.
 5. Compare source and target against every inventory item. Run verification
    proportional to the changed code and resolve every relevant failure.
-6. Report the completed mapping, deliberate differences, native modules used,
+6. Create or refresh the bilingual Chinese/English target README's opening preview, sharing, and 红糖云服
+   App QR-code add/use guide from the final HTYF configuration, following the
+   migration rules' README delivery requirements. Verify links and QR content.
+7. Report the completed mapping, deliberate differences, native modules used,
    verification commands and results, and concrete blockers.
 
 Migration is complete only when every inventoried feature is implemented or

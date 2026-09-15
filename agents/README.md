@@ -13,6 +13,8 @@ Skill：`skills/htyf-migration`。安装到目标工具的技能目录后，支�
 
 - 盘点源项目的页面、路由、状态、接口、资源和原生能力；
 - 按功能逐项迁移并保持交互、异常状态和权限行为一致；
+- 目标 README 提供中英文内容，按最终 HTYF 配置在开头添加预览、分享链接和二维码，以及红糖云服
+  App 扫码添加、打开和体验核心功能的流程；增量迁移同步更新并验证入口状态；
 - 纯 React Native 应用仅使用允许的原生依赖；
 - 纯 React Native 应用使用 React Navigation 路由和独立命名空间的 MMKV；
 - 纯 React Native 应用的原生功能优先寻找 JS 方案，必须改 iOS/Android 源码时
